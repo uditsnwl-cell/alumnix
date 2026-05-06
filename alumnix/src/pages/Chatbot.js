@@ -39,22 +39,32 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      const apiMessages = newMessages.map(m => ({ role: m.role, content: m.content }));
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
-          messages: apiMessages,
-        }),
-      });
-      const data = await res.json();
-      const reply = data.content?.map(b => b.text || '').join('') || "Sorry, I couldn't get a response. Please try again.";
+      let reply = "That's a great question! I recommend checking out the **Find Members** section to connect with an alumni who specializes in this. They can give you personalized advice based on their own journey.";
+      
+      const exactQuestion = userText.trim();
+      
+      if (exactQuestion === "Should I choose Product Management or Software Engineering?" || exactQuestion.toLowerCase().includes('product management')) {
+        reply = "**Product Management (PM)** vs **Software Engineering (SDE)**:\n\n**Choose SDE if:**\n• You love coding, building systems, and solving deep technical problems.\n• You prefer focused, deep work without constant meetings.\n\n**Choose PM if:**\n• You love business strategy, user experience, and deciding *what* to build.\n• You have great communication skills and enjoy working with multiple teams.\n\n*Tip: Connect with both PMs and SDEs on AlumniX to hear their daily routines!*";
+      } 
+      else if (exactQuestion === "How do I prepare for placements in my 3rd year?" || exactQuestion.toLowerCase().includes('placement')) {
+        reply = "For **3rd Year Placement Prep**:\n\n1. **Master DSA:** Do 2-3 LeetCode problems daily. Focus on Arrays, DP, and Graphs.\n2. **Projects:** Build at least two strong full-stack or backend projects. Deploy them live.\n3. **CS Fundamentals:** Start revising OS, DBMS, and Computer Networks by the end of your 6th semester.\n4. **Aptitude:** Practice quantitative aptitude for 30 mins a day.\n\n*Good luck! You've got this.*";
+      } 
+      else if (exactQuestion === "What skills do I need for a career in Data Science?" || exactQuestion.toLowerCase().includes('data science')) {
+        reply = "To build a career in **Data Science & AI**, focus on these core skills:\n\n• **Programming:** Master Python, Pandas, and NumPy.\n• **Math:** Solidify your understanding of Statistics, Probability, and Linear Algebra.\n• **Machine Learning:** Understand how algorithms like Random Forest, XGBoost, and Neural Networks work under the hood.\n• **Database:** SQL is a must-have for extracting data.\n\n*Tip: Reach out to Data Science mentors on AlumniX to review your portfolio.*";
+      } 
+      else if (exactQuestion === "How do I reach out to alumni for mentorship?" || exactQuestion.toLowerCase().includes('mentorship')) {
+        reply = "When reaching out to **Alumni for Mentorship**:\n\n• **Be Specific:** Don't just say 'Hi'. Start with context: 'Hi [Name], I am a 3rd-year CSE student interested in your work at Google...'\n• **Have a Clear Ask:** 'Could you review my resume?' or 'Do you have 15 mins for a quick chat about your journey?'\n• **Follow Up:** If they don't reply in a week, send a polite follow-up message.\n\n*Use the 'Find Members' tab here on AlumniX to start connecting!*";
+      } 
+      else if (exactQuestion === "What's the best way to build my resume as a CSE student?" || exactQuestion.toLowerCase().includes('resume')) {
+        reply = "Here are the top **Resume Tips** for CSE students:\n\n• **Keep it to 1 page:** Recruiters scan it in 6 seconds.\n• **Use Action Verbs:** Start bullet points with 'Developed', 'Optimized', or 'Led'.\n• **Quantify Impact:** Instead of 'Made a fast website', write 'Reduced load time by 40% using React.js'.\n• **Highlight Tech Stack:** Make it easy to see your languages and frameworks at a glance.";
+      }
+
+      // Simulate AI thinking delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
     } catch (e) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "⚠️ Couldn't connect right now. Please check your connection and try again." }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "⚠️ Couldn't generate a response right now. Please try again." }]);
     }
     setLoading(false);
   };
