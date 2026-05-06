@@ -8,6 +8,7 @@ import MentorMatching from './pages/MentorMatching';
 import Profile from './pages/Profile';
 import Opportunities from './pages/Opportunities';
 import Chatbot from './pages/Chatbot';
+import Societies from './pages/Societies';
 import Sidebar from './components/Sidebar';
 
 export default function App() {
@@ -34,17 +35,13 @@ export default function App() {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <Sidebar
-        page={page}
-        setPage={setPage}
-        role={role}
-        user={user}
-        onLogout={() => { setPage('landing'); setRole(null); setUser(null); }}
-      />
+      <Sidebar page={page} setPage={setPage} role={role} user={user}
+        onLogout={() => { setPage('landing'); setRole(null); setUser(null); }} />
       <main style={{ flex: 1, overflowY: 'auto', background: 'var(--navy)' }}>
         {page === 'dashboard' && <StudentDashboard setPage={setPage} user={user} />}
         {page === 'alumni-dashboard' && <AlumniDashboard setPage={setPage} user={user} />}
         {page === 'mentors' && <MentorMatching />}
+        {page === 'societies' && <Societies />}
         {page === 'profile' && <Profile role={role} user={user} setUser={setUser} />}
         {page === 'opportunities' && <Opportunities role={role} />}
         {page === 'chatbot' && <Chatbot />}

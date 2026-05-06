@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, Users, Briefcase, User, MessageSquare, LogOut, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
+import { LayoutDashboard, Users, Briefcase, User, MessageSquare, LogOut, ChevronLeft, ChevronRight, Zap, Award } from 'lucide-react';
 
 const studentNav = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'mentors', label: 'Find Mentors', icon: Users },
+  { id: 'societies', label: 'Societies', icon: Award },
   { id: 'opportunities', label: 'Opportunities', icon: Briefcase },
   { id: 'chatbot', label: 'AI Advisor', icon: MessageSquare },
   { id: 'profile', label: 'My Profile', icon: User },
@@ -13,6 +14,7 @@ const alumniNav = [
   { id: 'alumni-dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'opportunities', label: 'Post Jobs', icon: Briefcase },
   { id: 'mentors', label: 'Students', icon: Users },
+  { id: 'societies', label: 'Societies', icon: Award },
   { id: 'chatbot', label: 'AI Advisor', icon: MessageSquare },
   { id: 'profile', label: 'My Profile', icon: User },
 ];
@@ -26,22 +28,16 @@ export default function Sidebar({ page, setPage, role, user, onLogout }) {
       width: collapsed ? 72 : 240,
       background: 'var(--navy-2)',
       borderRight: '1px solid rgba(245,166,35,0.1)',
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '24px 0',
+      display: 'flex', flexDirection: 'column', padding: '24px 0',
       transition: 'width 0.3s ease',
-      position: 'sticky',
-      top: 0,
-      height: '100vh',
-      flexShrink: 0,
-      zIndex: 10,
+      position: 'sticky', top: 0, height: '100vh', flexShrink: 0, zIndex: 10,
     }}>
       <div style={{ padding: '0 20px 32px', display: 'flex', alignItems: 'center', gap: 10, overflow: 'hidden' }}>
         <div style={{
           width: 36, height: 36, borderRadius: 10,
           background: 'linear-gradient(135deg, var(--gold), #e8880a)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexShrink: 0, boxShadow: '0 4px 15px rgba(245,166,35,0.4)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+          boxShadow: '0 4px 15px rgba(245,166,35,0.4)',
         }}>
           <Zap size={18} color="#07091a" strokeWidth={2.5} />
         </div>
@@ -75,7 +71,7 @@ export default function Sidebar({ page, setPage, role, user, onLogout }) {
               display: 'flex', alignItems: 'center', gap: 12,
               padding: collapsed ? '12px 0' : '12px 14px',
               justifyContent: collapsed ? 'center' : 'flex-start',
-              borderRadius: 12, border: 'none', cursor: 'pointer',
+              borderRadius: 12, border: 'none',
               background: active ? 'linear-gradient(135deg, rgba(245,166,35,0.2), rgba(245,166,35,0.08))' : 'transparent',
               color: active ? 'var(--gold)' : 'var(--text-secondary)',
               fontWeight: active ? 600 : 400, fontSize: 14,
@@ -96,14 +92,14 @@ export default function Sidebar({ page, setPage, role, user, onLogout }) {
         <button onClick={() => setCollapsed(!collapsed)} style={{
           display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
           gap: 12, padding: '10px 14px', borderRadius: 10, border: 'none',
-          background: 'transparent', color: 'var(--text-muted)', fontSize: 13, transition: 'all 0.2s',
+          background: 'transparent', color: 'var(--text-muted)', fontSize: 13,
         }}>
           {collapsed ? <ChevronRight size={16} /> : <><ChevronLeft size={16} />{' Collapse'}</>}
         </button>
         <button onClick={onLogout} style={{
           display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
           gap: 12, padding: '10px 14px', borderRadius: 10, border: 'none',
-          background: 'transparent', color: 'var(--danger)', fontSize: 13, fontWeight: 500, transition: 'all 0.2s',
+          background: 'transparent', color: 'var(--danger)', fontSize: 13, fontWeight: 500,
         }}>
           <LogOut size={16} />
           {!collapsed && 'Logout'}

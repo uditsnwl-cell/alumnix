@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Edit3, CheckCircle, Zap, User, BookOpen, Code, Target } from 'lucide-react';
+import { Edit3, CheckCircle, Zap, User, BookOpen, Code, Target, Award } from 'lucide-react';
 
 const skillOptions = ['React', 'Python', 'Java', 'Machine Learning', 'SQL', 'Node.js', 'Data Analysis', 'Product Management', 'UI/UX Design', 'System Design', 'AWS', 'Docker'];
 const interestOptions = ['FinTech', 'Product Management', 'Data Science', 'Software Engineering', 'AI/ML', 'Consulting', 'Design', 'DevOps', 'Research', 'Entrepreneurship'];
+const societyOptions = ['None', 'UCS - University Coding Society', 'UDT - University Design Team', 'ULC - University Literary Club'];
 
 const generateBio = async (name, branch, year, skills, interests) => {
   await new Promise(r => setTimeout(r, 1800));
-  return `I'm ${name}, a ${year} student pursuing ${branch}. With a strong foundation in ${skills.slice(0, 2).join(' and ')}, I'm passionate about building innovative solutions at the intersection of technology and ${interests[0] || 'business'}. Currently exploring opportunities in ${interests.slice(0, 2).join(' and ')}, I thrive in collaborative environments where I can apply my analytical thinking and technical skills to solve real-world problems. I'm actively seeking mentorship and internship opportunities to accelerate my growth in the ${interests[0] || 'tech'} space.`;
+  return `I'm ${name}, a ${year} ${branch.includes('Batch') ? 'graduate' : 'student'} with a strong foundation in ${skills.slice(0, 2).join(' and ')}. I'm passionate about building innovative solutions at the intersection of technology and ${interests[0] || 'business'}. Exploring opportunities in ${interests.slice(0, 2).join(' and ')}, I thrive in collaborative environments where I can apply my analytical thinking to real-world problems.`;
 };
 
 export default function Profile({ role, user, setUser }) {
@@ -19,6 +20,7 @@ export default function Profile({ role, user, setUser }) {
     : 'Add your bio or generate one using AI below.'));
   const [skills, setSkills] = useState(user?.skills || ['React', 'Python', 'SQL']);
   const [interests, setInterests] = useState(user?.interests || ['Product Management', 'FinTech']);
+  const [society, setSociety] = useState(user?.society || 'None');
   const [generating, setGenerating] = useState(false);
   const [saved, setSaved] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -26,24 +28,19 @@ export default function Profile({ role, user, setUser }) {
 
   const handleGenBio = async () => {
     setGenerating(true);
-    const b = await generateBio(name, branch, year, skills, interests);
-    setBio(b);
+    setBio(await generateBio(name, branch, year, skills, interests));
     setGenerating(false);
   };
 
   const handleSave = () => {
-    setEditing(false);
-    setSaved(true);
-    if (setUser) {
-      setUser(prev => ({ ...prev, name, branch, year, bio, skills, interests }));
-    }
+    setEditing(false); setSaved(true);
+    if (setUser) setUser(prev => ({ ...prev, name, branch, year, bio, skills, interests, society }));
     setTimeout(() => setSaved(false), 3000);
   };
 
-  const toggleSkill = s => setSkills(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
-  const toggleInterest = i => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i]);
-
-  const completion = Math.min(100, [name, branch, year, bio.length > 50, skills.length > 0, interests.length > 0].filter(Boolean).length * 17);
+  const toggleSkill = s => setSkills(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]);
+  const toggleInterest = i => setInterests(p => p.includes(i) ? p.filter(x => x !== i) : [...p, i]);
+  const completion = Math.min(100, [name, branch, year, bio.length > 50, skills.length > 0, interests.length > 0, society !== 'None'].filter(Boolean).length * 14);
 
   return (
     <div style={{ padding: 40, maxWidth: 900, opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(20px)', transition: 'all 0.6s ease' }}>
@@ -72,7 +69,6 @@ export default function Profile({ role, user, setUser }) {
         <div style={{ height: 8, background: 'rgba(255,255,255,0.08)', borderRadius: 4 }}>
           <div style={{ width: `${completion}%`, height: '100%', background: 'linear-gradient(90deg, var(--gold), #ffc55a)', borderRadius: 4, transition: 'width 0.5s ease' }} />
         </div>
-        {completion < 100 && <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 8 }}>Complete all sections to maximize your match score.</p>}
       </div>
 
       <div style={{ background: 'var(--navy-card)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.07)', padding: 32, marginBottom: 20 }}>
@@ -90,13 +86,13 @@ export default function Profile({ role, user, setUser }) {
             ) : (
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, fontWeight: 800, color: 'var(--white)', marginBottom: 12 }}>{name}</h2>
             )}
-            <div style={{ display: 'flex', gap: 20 }}>
-              <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+              <div style={{ flex: 1, minWidth: 200 }}>
                 <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>Branch / Program</div>
                 {editing ? <input value={branch} onChange={e => setBranch(e.target.value)} style={{ width: '100%', padding: '8px 12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'var(--navy-2)', color: 'var(--text-primary)', fontSize: 14, outline: 'none' }} />
                   : <div style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500 }}>{branch}</div>}
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: 200 }}>
                 <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>{role === 'alumni' ? 'Graduation Batch' : 'Current Year'}</div>
                 {editing ? <input value={year} onChange={e => setYear(e.target.value)} style={{ width: '100%', padding: '8px 12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'var(--navy-2)', color: 'var(--text-primary)', fontSize: 14, outline: 'none' }} />
                   : <div style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500 }}>{year}</div>}
@@ -106,13 +102,30 @@ export default function Profile({ role, user, setUser }) {
         </div>
       </div>
 
+      {/* Society */}
+      <div style={{ background: 'var(--navy-card)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.07)', padding: 28, marginBottom: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+          <Award size={16} color="var(--gold)" />
+          <span style={{ fontWeight: 700, color: 'var(--white)', fontSize: 16 }}>University Society</span>
+        </div>
+        {editing ? (
+          <select value={society} onChange={e => setSociety(e.target.value)} style={{ width: '100%', padding: '12px 14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)', background: 'var(--navy-2)', color: 'var(--text-primary)', fontSize: 14, outline: 'none', cursor: 'pointer' }}>
+            {societyOptions.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        ) : (
+          <div style={{ padding: '12px 16px', background: society !== 'None' ? 'var(--gold-dim)' : 'rgba(255,255,255,0.03)', border: `1px solid ${society !== 'None' ? 'var(--gold-border)' : 'rgba(255,255,255,0.07)'}`, borderRadius: 10, color: society !== 'None' ? 'var(--gold)' : 'var(--text-muted)', fontSize: 14, fontWeight: 600 }}>
+            {society === 'None' ? 'Not part of any society yet' : `🏆 ${society}`}
+          </div>
+        )}
+      </div>
+
       <div style={{ background: 'var(--navy-card)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.07)', padding: 28, marginBottom: 20 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <BookOpen size={16} color="var(--gold)" />
             <span style={{ fontWeight: 700, color: 'var(--white)', fontSize: 16 }}>Professional Bio</span>
           </div>
-          <button onClick={handleGenBio} disabled={generating} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 10, border: '1px solid var(--gold-border)', background: 'var(--gold-dim)', color: 'var(--gold)', fontSize: 13, fontWeight: 700, transition: 'all 0.2s', opacity: generating ? 0.7 : 1 }}>
+          <button onClick={handleGenBio} disabled={generating} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 10, border: '1px solid var(--gold-border)', background: 'var(--gold-dim)', color: 'var(--gold)', fontSize: 13, fontWeight: 700, opacity: generating ? 0.7 : 1 }}>
             <Zap size={14} />
             {generating ? 'AI Writing...' : 'Generate with AI ✨'}
           </button>
@@ -121,11 +134,10 @@ export default function Profile({ role, user, setUser }) {
           <div style={{ padding: '20px', background: 'var(--navy-2)', borderRadius: 10, border: '1px solid var(--gold-border)' }}>
             <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
               {[1, 2, 3].map(i => <div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold)', animation: `pulse-gold ${0.5 + i * 0.2}s infinite` }} />)}
-              <span style={{ fontSize: 13, color: 'var(--gold)' }}>AI is crafting your professional bio...</span>
+              <span style={{ fontSize: 13, color: 'var(--gold)' }}>AI is crafting your bio...</span>
             </div>
             <div style={{ height: 12, background: 'linear-gradient(90deg, var(--navy-3), var(--gold-dim), var(--navy-3))', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite', borderRadius: 6, marginBottom: 8 }} />
-            <div style={{ height: 12, background: 'linear-gradient(90deg, var(--navy-3), var(--gold-dim), var(--navy-3))', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite 0.2s', borderRadius: 6, marginBottom: 8, width: '80%' }} />
-            <div style={{ height: 12, background: 'linear-gradient(90deg, var(--navy-3), var(--gold-dim), var(--navy-3))', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite 0.4s', borderRadius: 6, width: '90%' }} />
+            <div style={{ height: 12, background: 'linear-gradient(90deg, var(--navy-3), var(--gold-dim), var(--navy-3))', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite 0.2s', borderRadius: 6, width: '80%' }} />
           </div>
         ) : editing ? (
           <textarea value={bio} onChange={e => setBio(e.target.value)} rows={5} style={{ width: '100%', padding: '14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)', background: 'var(--navy-2)', color: 'var(--text-primary)', fontSize: 14, outline: 'none', lineHeight: 1.7, resize: 'vertical' }} />
@@ -143,7 +155,7 @@ export default function Profile({ role, user, setUser }) {
           {skillOptions.map(s => {
             const active = skills.includes(s);
             return (
-              <button key={s} onClick={() => editing && toggleSkill(s)} style={{ padding: '8px 16px', borderRadius: 20, border: `1px solid ${active ? 'var(--gold)' : 'rgba(255,255,255,0.1)'}`, background: active ? 'var(--gold-dim)' : 'transparent', color: active ? 'var(--gold)' : 'var(--text-secondary)', fontSize: 13, fontWeight: active ? 700 : 400, cursor: editing ? 'pointer' : 'default', transition: 'all 0.2s' }}>
+              <button key={s} onClick={() => editing && toggleSkill(s)} style={{ padding: '8px 16px', borderRadius: 20, border: `1px solid ${active ? 'var(--gold)' : 'rgba(255,255,255,0.1)'}`, background: active ? 'var(--gold-dim)' : 'transparent', color: active ? 'var(--gold)' : 'var(--text-secondary)', fontSize: 13, fontWeight: active ? 700 : 400, cursor: editing ? 'pointer' : 'default' }}>
                 {active && '✓ '}{s}
               </button>
             );
@@ -157,11 +169,11 @@ export default function Profile({ role, user, setUser }) {
           <span style={{ fontWeight: 700, color: 'var(--white)', fontSize: 16 }}>Career Interests</span>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          {interestOptions.map(interest => {
-            const active = interests.includes(interest);
+          {interestOptions.map(i => {
+            const active = interests.includes(i);
             return (
-              <button key={interest} onClick={() => editing && toggleInterest(interest)} style={{ padding: '8px 16px', borderRadius: 20, border: `1px solid ${active ? '#4da6ff' : 'rgba(255,255,255,0.1)'}`, background: active ? 'rgba(77,166,255,0.1)' : 'transparent', color: active ? 'var(--info)' : 'var(--text-secondary)', fontSize: 13, fontWeight: active ? 700 : 400, cursor: editing ? 'pointer' : 'default', transition: 'all 0.2s' }}>
-                {active && '✓ '}{interest}
+              <button key={i} onClick={() => editing && toggleInterest(i)} style={{ padding: '8px 16px', borderRadius: 20, border: `1px solid ${active ? '#4da6ff' : 'rgba(255,255,255,0.1)'}`, background: active ? 'rgba(77,166,255,0.1)' : 'transparent', color: active ? 'var(--info)' : 'var(--text-secondary)', fontSize: 13, fontWeight: active ? 700 : 400, cursor: editing ? 'pointer' : 'default' }}>
+                {active && '✓ '}{i}
               </button>
             );
           })}
