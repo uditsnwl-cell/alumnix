@@ -9,6 +9,9 @@ import Profile from './pages/Profile';
 import Opportunities from './pages/Opportunities';
 import Chatbot from './pages/Chatbot';
 import Societies from './pages/Societies';
+import AMABoard from './pages/AMABoard';
+import CommunityHub from './pages/CommunityHub';
+import NotificationFeed from './pages/NotificationFeed';
 import Sidebar from './components/Sidebar';
 
 export default function App() {
@@ -45,6 +48,9 @@ export default function App() {
         {page === 'profile' && <Profile role={role} user={user} setUser={setUser} />}
         {page === 'opportunities' && <Opportunities role={role} />}
         {page === 'chatbot' && <Chatbot />}
+        {page === 'ama' && <AMABoard />}
+        {page === 'communities' && <CommunityHub />}
+        {page === 'notifications' && <NotificationFeed />}
       </main>
     </div>
   );

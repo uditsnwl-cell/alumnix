@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { LayoutDashboard, Users, Briefcase, User, MessageSquare, LogOut, ChevronLeft, ChevronRight, Zap, Award } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { LayoutDashboard, Users, Briefcase, User, MessageSquare, LogOut, ChevronLeft, ChevronRight, Zap, Award, MessageCircle, Bell, Globe } from 'lucide-react';
+import { fetchNotifications } from '../data/db';
 
 const studentNav = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'ama', label: 'Alumni AMA', icon: MessageCircle },
+  { id: 'communities', label: 'Communities', icon: Globe },
   { id: 'mentors', label: 'Find Mentors', icon: Users },
   { id: 'societies', label: 'Societies', icon: Award },
   { id: 'opportunities', label: 'Opportunities', icon: Briefcase },
@@ -12,6 +15,8 @@ const studentNav = [
 
 const alumniNav = [
   { id: 'alumni-dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'ama', label: 'Alumni AMA', icon: MessageCircle },
+  { id: 'communities', label: 'Communities', icon: Globe },
   { id: 'opportunities', label: 'Post Jobs', icon: Briefcase },
   { id: 'mentors', label: 'Students', icon: Users },
   { id: 'societies', label: 'Societies', icon: Award },
@@ -21,7 +26,15 @@ const alumniNav = [
 
 export default function Sidebar({ page, setPage, role, user, onLogout }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [notifCount, setNotifCount] = useState(0);
   const nav = role === 'alumni' ? alumniNav : studentNav;
+
+  useEffect(() => {
+    fetchNotifications().then(n => setNotifCount(n.filter(x => !x.is_read).length));
+    const handler = () => { fetchNotifications().then(n => setNotifCount(n.filter(x => !x.is_read).length)); };
+    window.addEventListener('alumnix_db_change', handler);
+    return () => window.removeEventListener('alumnix_db_change', handler);
+  }, []);
 
   return (
     <aside style={{
@@ -66,6 +79,7 @@ export default function Sidebar({ page, setPage, role, user, onLogout }) {
       <nav style={{ flex: 1, padding: '0 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
         {nav.map(({ id, label, icon: Icon }) => {
           const active = page === id;
+          const isNotif = id === 'notifications';
           return (
             <button key={id} onClick={() => setPage(id)} style={{
               display: 'flex', alignItems: 'center', gap: 12,
@@ -81,7 +95,17 @@ export default function Sidebar({ page, setPage, role, user, onLogout }) {
               onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
               onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = active ? 'var(--gold)' : 'var(--text-secondary)'; }}
             >
-              <Icon size={18} strokeWidth={active ? 2.5 : 1.8} style={{ flexShrink: 0 }} />
+              <div style={{ position: 'relative', flexShrink: 0 }}>
+                <Icon size={18} strokeWidth={active ? 2.5 : 1.8} />
+                {isNotif && notifCount > 0 && (
+                  <span style={{
+                    position: 'absolute', top: -6, right: -8,
+                    background: '#dc2626', color: '#fff',
+                    fontSize: 9, fontWeight: 700, minWidth: 16, height: 16, borderRadius: 8,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4px',
+                  }}>{notifCount}</span>
+                )}
+              </div>
               {!collapsed && label}
             </button>
           );
@@ -89,6 +113,25 @@ export default function Sidebar({ page, setPage, role, user, onLogout }) {
       </nav>
 
       <div style={{ padding: '0 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <button onClick={() => setPage('notifications')} style={{
+          display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
+          gap: 12, padding: '10px 14px', borderRadius: 10, border: 'none',
+          background: page === 'notifications' ? 'rgba(255,255,255,0.08)' : 'transparent',
+          color: page === 'notifications' ? 'var(--white)' : 'var(--text-muted)', fontSize: 13, position: 'relative',
+        }}>
+          <div style={{ position: 'relative', flexShrink: 0 }}>
+            <Bell size={16} />
+            {notifCount > 0 && (
+              <span style={{
+                position: 'absolute', top: -6, right: -8,
+                background: '#dc2626', color: '#fff',
+                fontSize: 9, fontWeight: 700, minWidth: 16, height: 16, borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4px',
+              }}>{notifCount}</span>
+            )}
+          </div>
+          {!collapsed && 'Notifications'}
+        </button>
         <button onClick={() => setCollapsed(!collapsed)} style={{
           display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
           gap: 12, padding: '10px 14px', borderRadius: 10, border: 'none',
