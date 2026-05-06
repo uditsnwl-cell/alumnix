@@ -3,15 +3,10 @@
 // ============================================
 const USE_SUPABASE = false; // <-- Change to true when Supabase is ready
 
-import { createClient } from '@supabase/supabase-js';
-
-let supabase = null;
-if (USE_SUPABASE) {
-  supabase = createClient(
-    'YOUR_SUPABASE_URL',
-    'YOUR_SUPABASE_ANON_KEY'
-  );
-}
+// When USE_SUPABASE is true, install @supabase/supabase-js and uncomment:
+// import { createClient } from '@supabase/supabase-js';
+// const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+const supabase = null;
 
 // ============================================
 // LOCAL STORAGE SIMULATION (works offline)

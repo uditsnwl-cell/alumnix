@@ -40,7 +40,7 @@ export default function App() {
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar page={page} setPage={setPage} role={role} user={user}
         onLogout={() => { setPage('landing'); setRole(null); setUser(null); }} />
-      <main style={{ flex: 1, overflowY: 'auto', background: 'var(--navy)' }}>
+      <main style={{ flex: 1, overflowY: 'auto', background: '#f4f6fb' }}>
         {page === 'dashboard' && <StudentDashboard setPage={setPage} user={user} />}
         {page === 'alumni-dashboard' && <AlumniDashboard setPage={setPage} user={user} />}
         {page === 'mentors' && <MentorMatching />}
