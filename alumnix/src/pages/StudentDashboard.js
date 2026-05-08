@@ -24,7 +24,7 @@ const StatCard = ({ icon: Icon, label, value, sub, color }) => (
       </div>
       <span style={{ fontSize: 11, color: 'var(--success)', fontWeight: 600, background: 'rgba(34,212,94,0.1)', padding: '3px 8px', borderRadius: 6 }}>{sub}</span>
     </div>
-    <div style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 800, color: 'var(--white)', marginBottom: 4 }}>{value}</div>
+    <div style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 4 }}>{value}</div>
     <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{label}</div>
   </div>
 );
@@ -41,7 +41,7 @@ export default function StudentDashboard({ setPage, user }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
         <div>
           <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 4 }}>Welcome back 👋</p>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--white)' }}>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--text-primary)' }}>
             {firstName} <span style={{ color: 'var(--gold)' }}>{lastName}</span>
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginTop: 4 }}>
@@ -61,7 +61,7 @@ export default function StudentDashboard({ setPage, user }) {
 
       <div style={{ background: 'linear-gradient(135deg, rgba(245,166,35,0.15), rgba(245,166,35,0.05))', border: '1px solid var(--gold-border)', borderRadius: 16, padding: '20px 28px', marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <p style={{ fontWeight: 700, color: 'var(--white)', marginBottom: 8 }}>🚀 Complete your profile to get better matches</p>
+          <p style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>🚀 Complete your profile to get better matches</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.1)', borderRadius: 3, width: 200 }}>
               <div style={{ width: '68%', height: '100%', background: 'linear-gradient(90deg, var(--gold), #ffc55a)', borderRadius: 3 }} />
@@ -84,7 +84,7 @@ export default function StudentDashboard({ setPage, user }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 24 }}>
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--white)' }}>🎯 AI Recommended Mentors</h2>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--text-primary)' }}>🎯 AI Recommended Mentors</h2>
             <button onClick={() => setPage('mentors')} style={{ fontSize: 13, color: 'var(--gold)', background: 'none', border: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
               View All <ChevronRight size={14} />
             </button>
@@ -98,7 +98,7 @@ export default function StudentDashboard({ setPage, user }) {
                   {m.name[0]}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>{m.name}</div>
+                  <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>{m.name}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{m.role} · <span style={{ color: m.color }}>{m.company}</span></div>
                   <div style={{ marginTop: 8, display: 'flex', gap: 8 }}>
                     <span style={{ fontSize: 11, padding: '3px 10px', borderRadius: 20, background: m.color + '22', color: m.color, fontWeight: 600 }}>{m.domain}</span>
@@ -120,7 +120,7 @@ export default function StudentDashboard({ setPage, user }) {
         </div>
 
         <div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--white)', marginBottom: 20 }}>⚡ Recent Activity</h2>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 20 }}>⚡ Recent Activity</h2>
           <div style={{ background: 'var(--navy-card)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.07)', padding: 24 }}>
             {activities.map((a, i) => (
               <div key={i} style={{ display: 'flex', gap: 14, paddingBottom: i < activities.length - 1 ? 20 : 0, marginBottom: i < activities.length - 1 ? 20 : 0, borderBottom: i < activities.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>

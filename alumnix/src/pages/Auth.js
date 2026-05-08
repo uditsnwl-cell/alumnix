@@ -90,7 +90,7 @@ export default function Auth({ role, onAuth, onBack }) {
           </div>
           <h1 style={{
             fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800,
-            color: 'var(--white)', marginBottom: 6,
+            color: 'var(--text-primary)', marginBottom: 6,
           }}>
             {mode === 'login' ? 'Welcome Back' : 'Create Account'}
           </h1>

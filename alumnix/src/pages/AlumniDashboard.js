@@ -25,7 +25,7 @@ export default function AlumniDashboard({ setPage, user }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
         <div>
           <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 4 }}>Welcome back, Alumni 🎓</p>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--white)' }}>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--text-primary)' }}>
             {firstName} <span style={{ color: 'var(--gold)' }}>{lastName}</span>
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginTop: 4 }}>
@@ -45,7 +45,7 @@ export default function AlumniDashboard({ setPage, user }) {
           </div>
           <div style={{ width: 1, height: 60, background: 'rgba(255,255,255,0.1)' }} />
           <div>
-            <p style={{ fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>🏆 Top 5% Alumni Mentor</p>
+            <p style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>🏆 Top 5% Alumni Mentor</p>
             <p style={{ fontSize: 13, color: 'var(--text-secondary)', maxWidth: 400 }}>Your Mentor Score is visible to recruiters. Higher scores attract better collaboration and referral opportunities.</p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function AlumniDashboard({ setPage, user }) {
             <div style={{ width: 44, height: 44, borderRadius: 12, background: color + '22', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
               <Icon size={20} color={color} />
             </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 800, color: 'var(--white)', marginBottom: 4 }}>{value}</div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 4 }}>{value}</div>
             <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 4 }}>{label}</div>
             <div style={{ fontSize: 11, color: '#22d45e', fontWeight: 600 }}>{sub}</div>
           </div>
@@ -77,7 +77,7 @@ export default function AlumniDashboard({ setPage, user }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24 }}>
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--white)' }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--text-primary)' }}>
               📬 Connection Requests <span style={{ marginLeft: 8, background: 'var(--gold)', color: '#07091a', borderRadius: 20, padding: '2px 10px', fontSize: 13, fontWeight: 800 }}>{requests.length}</span>
             </h2>
           </div>
@@ -88,7 +88,7 @@ export default function AlumniDashboard({ setPage, user }) {
                   {r.name[0]}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>{r.name}</div>
+                  <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>{r.name}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 6 }}>{r.branch}</div>
                   <span style={{ fontSize: 11, padding: '3px 10px', borderRadius: 20, background: r.color + '22', color: r.color, fontWeight: 600 }}>Interested in: {r.interest}</span>
                 </div>
@@ -112,13 +112,13 @@ export default function AlumniDashboard({ setPage, user }) {
         </div>
 
         <div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--white)', marginBottom: 20 }}>📋 Your Posted Jobs</h2>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 20 }}>📋 Your Posted Jobs</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {postedJobs.map((j, i) => (
               <div key={i} style={{ background: 'var(--navy-card)', borderRadius: 14, border: '1px solid rgba(255,255,255,0.07)', padding: '18px 20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                   <div>
-                    <div style={{ fontWeight: 700, color: 'var(--white)', marginBottom: 2 }}>{j.title}</div>
+                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>{j.title}</div>
                     <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{j.company}</div>
                   </div>
                   <span style={{ fontSize: 11, padding: '3px 10px', borderRadius: 20, background: 'rgba(34,212,94,0.15)', color: 'var(--success)', fontWeight: 600, height: 'fit-content' }}>{j.status}</span>
@@ -137,7 +137,7 @@ export default function AlumniDashboard({ setPage, user }) {
 
           <div style={{ marginTop: 20, background: 'linear-gradient(135deg, rgba(34,212,94,0.1), rgba(34,212,94,0.03))', border: '1px solid rgba(34,212,94,0.2)', borderRadius: 16, padding: 20 }}>
             <p style={{ fontSize: 12, color: 'var(--success)', fontWeight: 700, marginBottom: 8 }}>🌟 YOUR IMPACT</p>
-            <p style={{ fontSize: 22, fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--white)', marginBottom: 4 }}>3 Students Hired</p>
+            <p style={{ fontSize: 22, fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 4 }}>3 Students Hired</p>
             <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Through your referrals this year. You're making a real difference!</p>
           </div>
         </div>

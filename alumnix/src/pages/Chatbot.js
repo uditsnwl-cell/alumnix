@@ -89,7 +89,7 @@ export default function Chatbot() {
             <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg, var(--gold), #e8880a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Sparkles size={16} color="#07091a" />
             </div>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: 'var(--white)' }}>
+            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: 'var(--text-primary)' }}>
               AI Career <span style={{ color: 'var(--gold)' }}>Advisor</span>
             </h1>
             <span style={{ fontSize: 11, padding: '3px 10px', borderRadius: 20, background: 'rgba(34,212,94,0.15)', color: 'var(--success)', fontWeight: 700 }}>LIVE</span>

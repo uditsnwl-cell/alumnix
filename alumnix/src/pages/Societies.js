@@ -96,7 +96,7 @@ function MemberModal({ member, onClose, society }) {
             boxShadow: `0 10px 30px ${member.color}55`,
           }}>{member.name[0]}</div>
           <div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, fontWeight: 800, color: 'var(--white)', marginBottom: 4 }}>{member.name}</h2>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 4 }}>{member.name}</h2>
             <div style={{ fontSize: 14, color: member.color, fontWeight: 600 }}>{member.role}</div>
             <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>{member.branch}</div>
           </div>
@@ -160,7 +160,7 @@ function SocietyDetail({ society, onBack }) {
           }}>{society.icon}</div>
           <div style={{ flex: 1, minWidth: 240 }}>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 56, fontWeight: 800, color: society.color, lineHeight: 1, marginBottom: 6 }}>{society.code}</div>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 700, color: 'var(--white)', marginBottom: 12 }}>{society.name}</h1>
+            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>{society.name}</h1>
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--text-secondary)' }}><Calendar size={14} /> Founded {society.founded}</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--text-secondary)' }}><Users size={14} /> {society.members} members</div>
@@ -171,13 +171,13 @@ function SocietyDetail({ society, onBack }) {
 
       {/* About */}
       <div style={{ background: 'var(--navy-card)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.07)', padding: 28, marginBottom: 24 }}>
-        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 12 }}>About</h3>
+        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>About</h3>
         <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.8 }}>{society.description}</p>
       </div>
 
       {/* Achievements */}
       <div style={{ background: 'var(--navy-card)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.07)', padding: 28, marginBottom: 32 }}>
-        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 16 }}>🏆 Achievements</h3>
+        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 16 }}>🏆 Achievements</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {society.achievements.map((a, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', background: 'rgba(255,255,255,0.03)', borderRadius: 10 }}>
@@ -189,7 +189,7 @@ function SocietyDetail({ society, onBack }) {
       </div>
 
       {/* Leadership */}
-      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 20 }}>👑 Leadership</h2>
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 20 }}>👑 Leadership</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, marginBottom: 32 }}>
         {[society.president, society.vicePresident].map((p, i) => (
           <div key={i} onClick={() => setSelectedMember(p)} style={{
@@ -217,7 +217,7 @@ function SocietyDetail({ society, onBack }) {
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 11, color: p.color, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 }}>{p.role}</div>
-              <div style={{ fontWeight: 700, fontSize: 17, color: 'var(--white)', marginBottom: 2 }}>{p.name}</div>
+              <div style={{ fontWeight: 700, fontSize: 17, color: 'var(--text-primary)', marginBottom: 2 }}>{p.name}</div>
               <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{p.branch}</div>
             </div>
           </div>
@@ -225,7 +225,7 @@ function SocietyDetail({ society, onBack }) {
       </div>
 
       {/* Members */}
-      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 20 }}>👥 Members</h2>
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 20 }}>👥 Members</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
         {society.membersList.map((m, i) => (
           <div key={i} onClick={() => setSelectedMember(m)} style={{
@@ -240,7 +240,7 @@ function SocietyDetail({ society, onBack }) {
               background: m.color, display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 22, color: '#07091a',
             }}>{m.name[0]}</div>
-            <div style={{ fontWeight: 700, color: 'var(--white)', fontSize: 14, marginBottom: 4 }}>{m.name}</div>
+            <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 14, marginBottom: 4 }}>{m.name}</div>
             <div style={{ fontSize: 12, color: m.color, fontWeight: 600, marginBottom: 4 }}>{m.role}</div>
             <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{m.branch}</div>
           </div>
@@ -266,7 +266,7 @@ export default function Societies() {
           <Award size={20} color="var(--gold)" />
           <span style={{ fontSize: 13, color: 'var(--gold)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>University Societies</span>
         </div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, color: 'var(--white)', marginBottom: 8 }}>Explore Societies</h1>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 8 }}>Explore Societies</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>Discover communities, meet members, and find mentors who shared your passion.</p>
       </div>
 
@@ -288,7 +288,7 @@ export default function Societies() {
             <div style={{ position: 'relative' }}>
               <div style={{ fontSize: 56, marginBottom: 16 }}>{s.icon}</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 40, fontWeight: 800, color: s.color, marginBottom: 6, letterSpacing: -1 }}>{s.code}</div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 12 }}>{s.name}</h3>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>{s.name}</h3>
               <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 20 }}>{s.description.slice(0, 100)}...</p>
               <div style={{ display: 'flex', gap: 16, fontSize: 12, color: 'var(--text-muted)' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><Users size={12} /> {s.members} members</span>

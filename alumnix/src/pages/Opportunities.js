@@ -37,12 +37,12 @@ export default function Opportunities({ role }) {
     return (
       <div style={{ padding: 40, maxWidth: 700 }}>
         <button onClick={() => setShowPost(false)} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', fontSize: 14, marginBottom: 24, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>← Back</button>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--white)', marginBottom: 8 }}>Post an Opportunity</h1>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 8 }}>Post an Opportunity</h1>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 32 }}>Help students from your university get their big break.</p>
         {posted ? (
           <div style={{ textAlign: 'center', padding: 60 }}>
             <CheckCircle size={60} color="var(--success)" style={{ marginBottom: 20 }} />
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: 'var(--white)', marginBottom: 12 }}>Opportunity Posted!</h2>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12 }}>Opportunity Posted!</h2>
             <p style={{ color: 'var(--text-secondary)' }}>Students are already seeing your posting.</p>
             <button onClick={() => { setPosted(false); setShowPost(false); }} style={{ marginTop: 24, padding: '12px 28px', borderRadius: 12, border: 'none', background: 'var(--gold)', color: '#07091a', fontWeight: 700 }}>View All Opportunities</button>
           </div>
@@ -75,7 +75,7 @@ export default function Opportunities({ role }) {
     <div style={{ padding: 40, maxWidth: 1100, opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(20px)', transition: 'all 0.6s ease' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
         <div>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, color: 'var(--white)', marginBottom: 8 }}>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 8 }}>
             {role === 'alumni' ? 'Posted Opportunities' : 'Opportunities For You'}
           </h1>
           <p style={{ color: 'var(--text-secondary)' }}>
@@ -117,7 +117,7 @@ export default function Opportunities({ role }) {
               </div>
             </div>
 
-            <h3 style={{ fontWeight: 700, fontSize: 17, color: 'var(--white)', marginBottom: 4 }}>{j.title}</h3>
+            <h3 style={{ fontWeight: 700, fontSize: 17, color: 'var(--text-primary)', marginBottom: 4 }}>{j.title}</h3>
             <p style={{ fontSize: 14, color: j.color, fontWeight: 600, marginBottom: 12 }}>{j.company}</p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
@@ -129,7 +129,7 @@ export default function Opportunities({ role }) {
                   <Clock size={13} /> {j.duration}
                 </span>
               </div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--white)' }}>{j.stipend}</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)' }}>{j.stipend}</div>
             </div>
 
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -177,7 +177,7 @@ export default function Opportunities({ role }) {
               <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)' }}><MapPin size={16} /> {selectedJob.location}</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)' }}><Clock size={16} /> {selectedJob.duration}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--white)', fontWeight: 700 }}>💰 {selectedJob.stipend}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-primary)', fontWeight: 700 }}>💰 {selectedJob.stipend}</div>
               </div>
             </div>
 

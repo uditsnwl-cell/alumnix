@@ -35,7 +35,7 @@ export default function MentorMatching() {
           <Zap size={20} color="var(--gold)" />
           <span style={{ fontSize: 13, color: 'var(--gold)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>AI-Powered Matching</span>
         </div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, color: 'var(--white)', marginBottom: 8 }}>Find Your Mentor</h1>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 8 }}>Find Your Mentor</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>Our AI analyzes your profile, interests, and goals to find your perfect mentor match.</p>
       </div>
 
@@ -67,7 +67,7 @@ export default function MentorMatching() {
                   {m.name[0]}
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--white)', marginBottom: 2 }}>{m.name}</div>
+                  <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--text-primary)', marginBottom: 2 }}>{m.name}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{m.role}</div>
                   <div style={{ fontSize: 13, color: m.color, fontWeight: 600 }}>{m.company}</div>
                 </div>
